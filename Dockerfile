@@ -17,4 +17,4 @@ EXPOSE 6262/tcp
 WORKDIR /bin
 COPY --from=builder /grpc-chat/server /bin
 
-ENTRYPOINT ["./bin/server"]
+ENTRYPOINT /bin/server -s -p $PASS -h "0.0.0.0:$PORT"
