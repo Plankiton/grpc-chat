@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+  api:
+    restart: always
+    environment:
+      - "PASS=joao"
+      - "PORT=8000"
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    image: chat:dev
+    working_dir: /bin
+    tty: true
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - ./:/chat
+    command: /bin/server -s -p $PASS -h "0.0.0.0:$PORT"
